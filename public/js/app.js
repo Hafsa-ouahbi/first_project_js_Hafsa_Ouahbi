@@ -141,14 +141,34 @@ if (Answer === "signing up") {
     console.log(Person.dataBase)
 }
 if (Answer === "logging in") {
-    let User = null //makynch ta ila l9inah 
-    let checkEmaill = prompt("insert your email")
+    let User = null //makynch ta ila l9inah
+    //!---------------email
+    
     while (true) {
+        let checkEmaill = prompt("insert your email").trim().toLowerCase()
         for (let i = 0; i < Person.dataBase.length; i++) {
-            if (checkEmaill === Person.dataBase[i].email) {
+            if (checkEmaill === Person.dataBase[i].email) {//database[i] means the first person at i = 0 and the secind person when the i = 1 and sooo on 
                 User = Person.dataBase[i]
                 break
             }
         }
+        if(User === null) {
+            alert("this email does not exist")
+            continue
+        }
+        break //if exist out from the loup
+    }
+    //!----------------password
+    
+    while(true){
+        let pass = prompt("insert your password :")
+        if(pass === User.password){
+            alert("welcome" + User.name)
+            break
+        }else {
+            alert("password not correct please try again ;")
+            continue
+        }
     }
 }
+if ()
