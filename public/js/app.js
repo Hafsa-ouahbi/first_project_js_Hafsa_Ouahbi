@@ -5,6 +5,7 @@ class Person {
         this.email = email
         this.age = age
         this.password = password
+        this.balance = 0
         Person.dataBase.push(this)
     }
 }
@@ -164,6 +165,10 @@ if (Answer === "logging in") {
         let pass = prompt("insert your password :")
         if(pass === User.password){
             alert("welcome" + User.name)
+            while(true) {
+                alert("your current balance is "+ User.balance)
+                let service = prompt("choose a service : \n -Logout\n -Withdraw Money\n -Deposit Money\n -Take a Loan\n -Invest\n -History")
+            }
             break
         }else {
             alert("password not correct please try again ;")
@@ -171,4 +176,3 @@ if (Answer === "logging in") {
         }
     }
 }
-if ()
