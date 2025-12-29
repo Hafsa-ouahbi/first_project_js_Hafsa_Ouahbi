@@ -1,14 +1,15 @@
 class Person {
-    constructor(name, age, password, email) {
+    static dataBase = []
+    constructor(name, email, age, password) {
         this.name = name
+        this.email = email
         this.age = age
         this.password = password
-        this.email = email
+        Person.dataBase.push(this)
     }
 }
 let Answer = prompt("choose one : signing up / logging in / changing the password").trim().toLocaleLowerCase()
-let dataBase = []
-if (Answer == "signing up") {
+if (Answer === "signing up") {
     //*----------------------------------name---------
     let name;
     while (true) {// to keep asking until the name is valid
@@ -49,13 +50,14 @@ if (Answer == "signing up") {
     // dataBase.push(name)
     // console.log(dataBase)
     //*------------------------------------email---------
+    let email;
     while (true) {
-        let email = prompt("insert a valid email :").trim().toLowerCase()
-        
+        email = prompt("insert a valid email :").trim().toLowerCase()
+
         //length check
         let countEmail = 0
         for (let i = 0; i < email.length; i++) {
-            if (name[i] !== " ") {
+            if (email[i] !== " ") {
                 countEmail++
             }
         }
@@ -71,7 +73,7 @@ if (Answer == "signing up") {
                 break
             }
         }
-        if(spacehere > 0){
+        if (spacehere > 0) {
             alert("your email is invalid because of your space in the midde of the input ")
             continue
         }
@@ -83,20 +85,17 @@ if (Answer == "signing up") {
                 aCount++
             }
         }
-        if (aCount > 1) {
+        if (aCount !== 1) {
             alert("you can't have more than one @ in your email please insert a valid email")
-            continue //ask again
-        }
-        if (aCount === 0) {
-            alert("you can't insert an email withour @")
             continue //ask again
         }
         break //is valid
     }
     //*-------------------------------age-------------
-    while(true) {
-        let age = prompt("insert your age :").trim()
-        if(age.includes(" ")){
+    let age
+    while (true) {
+        age = prompt("insert your age :").trim()
+        if (age.includes(" ")) {
             alert("age cannot have a space insert a valid age please ")
             continue
         }
@@ -106,5 +105,50 @@ if (Answer == "signing up") {
             continue
         }
         break //age valid
+    }
+    //*--------------------------password-----------------
+    let password;
+    while (true) {
+        password = prompt("insert a valid password :").trim().toLowerCase()
+        if (password.length < 7) {
+            alert("insert at least 7 character not less ")
+            continue
+        }
+        if (password.includes(" ")) {
+            alert("the passowrd cannot have a space in the middle of it insert a valid one please")
+            continue
+        }
+        let arr = ["@", "#", "-", "+", "*", "/"]
+        let specialCount = 0
+        for (let i = 0; i < password.length; i++) {
+            if (arr.includes(password[i])) {
+                specialCount++
+            }
+        }
+        if (specialCount === 0) {
+            alert("your password must have at least one special character ")
+            continue
+        }
+        let check = prompt("re-enter your exact password ")
+        if (check === password) {
+            alert("your password are confirmed")
+        } else {
+            alert("you are blocked ")
+        }
+        break
+    }
+    let user = new Person(name, email, age, password)
+    console.log(Person.dataBase)
+}
+if (Answer === "logging in") {
+    let User = null //makynch ta ila l9inah 
+    let checkEmaill = prompt("insert your email")
+    while (true) {
+        for (let i = 0; i < Person.dataBase.length; i++) {
+            if (checkEmaill === Person.dataBase[i].email) {
+                User = Person.dataBase[i]
+                break
+            }
+        }
     }
 }
